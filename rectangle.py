@@ -1,4 +1,4 @@
-from typing import Tuple
+from typing import Self, Tuple
 import pygame
 
 type rectType = Tuple[int, int, int, int] # x, y, width, height
@@ -60,9 +60,9 @@ class Rectangles:
     self.rects = ()
     for rect in rects: # rect is rectType | rectColorType
 
-      if isinstance(rect[0], tuple) and len(rect) == 2: # rect == rectColorType
+      if isinstance(rect[0], tuple) and len(rect) == 2: # rectColorType
         self.rects = self.rects + (Rectangle(rect[0], rect[1]),)
-      elif len(rect) == 4: # rect == rectType (rect is always a Tuple[Unknown, ...] so we don't need to check for it)
+      elif len(rect) == 4: # rectType
         self.rects = self.rects + (Rectangle(rect),)
 
     self._size = len(rects)
@@ -70,7 +70,7 @@ class Rectangles:
     return
 
   
-  def __iter__(self):
+  def __iter__(self) -> Self:
     self._idx = 0
     return self
   
