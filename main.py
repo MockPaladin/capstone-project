@@ -11,7 +11,7 @@ pygame.display.set_caption("main.py") # NotImplementedError (TechSmart)
 
 running = True
 player = Player((window.get_width() // 2 - 1, window.get_height() // 2 - 10, 20, 20))
-player.methods(keys.methods)
+player.methods = keys.methods
 # window.get_width() // 2 - 10, window.get_height() // 2 - 10 is the center of the screen, accounting for rect size
 
 while running:

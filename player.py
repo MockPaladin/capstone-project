@@ -28,6 +28,11 @@ class Player(Rectangle):
     rect.normalize() # for negative width | height
     pygame.draw.rect(window, self.color, rect, border_radius=0)
 
+  @property
+  def methods(self) -> dict[int, strictAttributeModifier]:
+    return self._methods
+
+  @methods.setter
   def methods(self, args: dict[int, strictAttributeModifier]) -> None:
 
     _args = {int(key): value for key, value in args.items()}
