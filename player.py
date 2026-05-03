@@ -13,7 +13,7 @@ class Player(Rectangle):
   HEIGHT: Final = 3
   COLOR: Final = 4
 
-  def __init__(self, rect: rectType | rectColorType):
+  def __init__(self, rect: rectType | rectColorType) -> None:
 
     if len(rect) == 2: # rectColorType
       super().__init__(rect[0], rect[1])
