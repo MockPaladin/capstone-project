@@ -1,17 +1,22 @@
-from typing import Self, Tuple
+from typing import Literal, Self, Tuple
 import pygame
 
 type rectType = Tuple[int, int, int, int] # x, y, width, height
-type colorType = Tuple[int, int, int] | Tuple[int, int, int, int] # RGB | RGBA
+type colorType = Tuple[int, int, int] | Tuple[int, int, int, int] | Tuple[Literal[255], Literal[255], Literal[255], Literal[255]] # RGB | RGBA
 type rectColorType = Tuple[rectType, colorType]
 
 class Rectangle:
 
   color: pygame.Color # RGBA, A=255
 
-  def __init__(self, rect: rectType, color: colorType = (255, 255, 255, 255)) -> None:
+  def __init__(self, rect: rectType | pygame.Rect, color: colorType = (255, 255, 255, 255)) -> None:
 
     self.color = pygame.Color(*color)
+
+    if isinstance(rect, pygame.Rect):
+      self.values = tuple(rect)
+
+
     self.values = rect
     return
   
