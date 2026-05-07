@@ -1,7 +1,9 @@
 import sys
 import pygame
+import draw
 import keys
 from player import Player
+from rectangle import Rectangle
 
 pygame.init()
 clock = pygame.time.Clock()
@@ -13,6 +15,8 @@ running = True
 player = Player((window.get_width() // 2 - 1, window.get_height() // 2 - 10, 20, 20))
 player.methods = keys.methods
 # window.get_width() // 2 - 10, window.get_height() // 2 - 10 is the center of the screen, accounting for rect size
+
+rect2 = Rectangle((50, 50, 50, 50), (255, 0, 0, 255))
 
 while running:
 
@@ -27,9 +31,12 @@ while running:
   
   if keys[pygame.K_ESCAPE]: window = pygame.display.set_mode((1020, 580)) # exit fullscreen
   if keys[pygame.K_f]: window = pygame.display.set_mode((0, 0), pygame.FULLSCREEN) # enter fullscreen
+
+  if player.colliding(rect2): print("collision")
   
 
   window.fill((59, 120, 69))
+  draw.rects(window, rect2)
   player.draw(window)
 
   pygame.display.flip()

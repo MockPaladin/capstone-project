@@ -10,5 +10,4 @@ methods: dict[int, strictAttributeModifier] = {
   pygame.K_RIGHT: lambda: (Player.WIDTH, 5),
   pygame.K_UP: lambda: (Player.HEIGHT, -5),
   pygame.K_DOWN: lambda: (Player.HEIGHT, 5)
-
 }

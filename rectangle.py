@@ -1,8 +1,9 @@
-from typing import Literal, Self, Tuple
+from __future__ import annotations
+from typing import  Self, Tuple
 import pygame
 
 type rectType = Tuple[int, int, int, int] # x, y, width, height
-type colorType = Tuple[int, int, int] | Tuple[int, int, int, int] | Tuple[Literal[255], Literal[255], Literal[255], Literal[255]] # RGB | RGBA
+type colorType = Tuple[int, int, int] | Tuple[int, int, int, int]# RGB | RGBA
 type rectColorType = Tuple[rectType, colorType]
 
 class Rectangle:
@@ -19,6 +20,35 @@ class Rectangle:
 
     self.values = rect
     return
+  
+  def colliding(self, rect2: Rectangle | pygame.Surface) -> bool:
+  
+    _rect1 = pygame.Rect(self.values,)
+
+    if isinstance(rect2, pygame.Surface):
+      _rect2 = rect2.get_bounding_rect()
+      if _rect1.union(_rect2) != _rect2: # if part of _rect1 is outside of _rect2
+        return True
+      return False
+
+    _rect2 = pygame.Rect(rect2.values,)
+    if _rect1.colliderect(_rect2):
+      return True
+    return False
+  
+  def __iter__(self) -> Self:
+    self._idx = 0
+    return self
+  
+  def __next__(self) -> int:
+    try:
+      value = self.values[self._idx]
+    except IndexError:
+      raise StopIteration()
+    
+    self._idx += 1
+    return value
+    
   
   @property
   def x(self) -> int:
