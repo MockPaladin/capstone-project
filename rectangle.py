@@ -16,11 +16,11 @@ class Rectangle:
 
     self.color = pygame.Color(*color)
 
-    if isinstance(rect, pygame.Rect):
+    if isinstance(rect, pygame.Rect): # rect is pygame.Rect
       self.values = (rect.x, rect.y, rect.width, rect.height)
       return
 
-    if isinstance(rect[0], tuple):
+    if isinstance(rect[0], tuple): # rect is tupledRectType
       self.values = (rect[0][0], rect[0][1], rect[1], rect[2])
       return
 
