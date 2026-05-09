@@ -2,4 +2,4 @@
 To run:
 ```python3 main.py```
 To install requirements:
-```pip -r install requirements.txt```
+```pip install -r requirements.txt```

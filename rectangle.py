@@ -3,22 +3,28 @@ from typing import  Self, Tuple
 import pygame
 
 type rectType = Tuple[int, int, int, int] # x, y, width, height
+type tupledRectType = Tuple[Tuple[int, int], int, int]
 type colorType = Tuple[int, int, int] | Tuple[int, int, int, int]# RGB | RGBA
 type rectColorType = Tuple[rectType, colorType]
 
 class Rectangle:
 
   color: pygame.Color # RGBA, A=255
+  values: Tuple[int, int, int, int]
 
-  def __init__(self, rect: rectType | pygame.Rect, color: colorType = (255, 255, 255, 255)) -> None:
+  def __init__(self, rect: rectType | tupledRectType | pygame.Rect, color: colorType = (255, 255, 255, 255)) -> None:
 
     self.color = pygame.Color(*color)
 
     if isinstance(rect, pygame.Rect):
-      self.values = tuple(rect)
+      self.values = (rect.x, rect.y, rect.width, rect.height)
+      return
 
+    if isinstance(rect[0], tuple):
+      self.values = (rect[0][0], rect[0][1], rect[1], rect[2])
+      return
 
-    self.values = rect
+    self.values = rect # type: ignore
     return
   
   def colliding(self, rect2: Rectangle | pygame.Surface) -> bool:

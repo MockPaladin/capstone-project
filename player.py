@@ -48,8 +48,8 @@ class Player(Rectangle):
 
     for _key, mod in methods.items():
       if keys[_key]:
-        attr, delta = mod()
 
+        attr, delta = mod()
         if attr == Player.X: self.x += delta
         elif attr == Player.Y: self.y += delta
         elif attr == Player.WIDTH: self.width += delta
