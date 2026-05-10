@@ -15,7 +15,7 @@ text_surface = font.render("YOU LOSE", True, (255, 255, 255))
 clock = pygame.time.Clock()
 
 window = pygame.display.set_mode((0, 0), pygame.FULLSCREEN) # (0, 0) sets native resolution
-pygame.display.set_caption("main.py") # NotImplementedError (TechSmart)
+pygame.display.set_caption("main.py") # -> NotImplementedError (TechSmart)
 
 running = True
 game_over = False
