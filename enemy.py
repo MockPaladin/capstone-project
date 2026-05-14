@@ -4,4 +4,4 @@ class Enemy(Player):
 
   def __init__(self):
 
-    
+    pass
