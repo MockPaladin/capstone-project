@@ -1,3 +1,4 @@
+from math import hypot
 import pygame
 from rectangle import Rectangle, colorType, rectType, rectColorType
 from typing import Callable, Final, Tuple
@@ -28,19 +29,6 @@ class Player(Rectangle):
     rect.normalize() # for negative width | height
     pygame.draw.rect(window, self.color, rect, border_radius=0)
 
-  @property
-  def methods(self) -> dict[int, strictAttributeModifier]:
-    return self._methods
-
-  @methods.setter
-  def methods(self, args: dict[int, strictAttributeModifier]) -> None:
-
-    _args = {int(key): value for key, value in args.items()}
-    self._methods = _args
-
-  def get_methods(self) -> dict[int, strictAttributeModifier]:
-    return self._methods
-  
   def update(self) -> None:
 
     methods = self._methods
@@ -54,3 +42,20 @@ class Player(Rectangle):
         elif attr == Player.Y: self.y += delta
         elif attr == Player.WIDTH: self.width += delta
         elif attr == Player.HEIGHT: self.height += delta
+
+  def vec2other(self, other: Player | Rectangle) -> Tuple[float, float]:
+
+    vec = (other.center[0] - self.center[0], other.center[1] - self.center[1]) # distance between the two centers
+    magnitude = hypot(vec[0], vec[1])
+
+    return (vec[0] / magnitude, vec[1] / magnitude) # return unit vector in that direction
+
+  @property
+  def methods(self) -> dict[int, strictAttributeModifier]:
+    return self._methods
+  
+  @methods.setter
+  def methods(self, args: dict[int, strictAttributeModifier]) -> None:
+
+    _args = {int(key): value for key, value in args.items()}
+    self._methods = _args

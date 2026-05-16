@@ -88,6 +88,10 @@ class Rectangle:
   def height(self, value: int) -> None:
     self.values = (self.x, self.y, self.width, value)
 
+  @property
+  def center(self) -> Tuple[int, int]:
+    return (self.x + self.width // 2, self.y + self.height // 2)
+
   
   
 class Rectangles:
