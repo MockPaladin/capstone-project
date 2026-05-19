@@ -1,4 +1,5 @@
 from __future__ import annotations
+from math import hypot
 from typing import  Self, Tuple
 import pygame
 
@@ -27,20 +28,38 @@ class Rectangle:
     self.values = rect # type: ignore
     return
   
-  def colliding(self, rect2: Rectangle | pygame.Surface) -> bool:
+  def colliding(self, rect2: Rectangle | pygame.Surface | Tuple[Rectangle, ...]) -> bool:
   
     _rect1 = pygame.Rect(self.values,)
+    _rect1.normalize()
 
     if isinstance(rect2, pygame.Surface):
       _rect2 = rect2.get_bounding_rect()
       if _rect1.union(_rect2) != _rect2: # if part of _rect1 is outside of _rect2
         return True
       return False
+    
+    if isinstance(rect2, tuple):
+
+      for _rect2 in rect2:
+
+        sub_rect = pygame.Rect(_rect2.values,)
+        if _rect1.colliderect(sub_rect):
+          return True
+        
+      return False
 
     _rect2 = pygame.Rect(rect2.values,)
     if _rect1.colliderect(_rect2):
       return True
     return False
+  
+  def vec_to(self, other: Rectangle) -> Tuple[float, float]:
+
+    vec = (other.center[0] - self.center[0], other.center[1] - self.center[1]) # distance between the two centers
+    magnitude = hypot(vec[0], vec[1])
+
+    return (vec[0] / magnitude, vec[1] / magnitude) # return unit vector in that direction
   
   def __iter__(self) -> Self:
     self._idx = 0
@@ -128,3 +147,7 @@ class Rectangles:
     
     self._idx += 1
     return rect
+  
+  def __len__(self) -> int:
+
+    return len(self.rects)
