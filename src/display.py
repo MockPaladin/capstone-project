@@ -14,6 +14,8 @@ def GAME_OVER() -> None:
 
     running = True
 
+    clock = pygame.time.Clock()
+
     window = pygame.display.set_mode((800, 600), pygame.SCALED)
     pygame.display.set_caption("GAME OVER")
 
@@ -32,5 +34,6 @@ def GAME_OVER() -> None:
         )  # add text surface to window
 
         pygame.display.flip()
+        clock.tick(60)
 
     pygame.quit()
