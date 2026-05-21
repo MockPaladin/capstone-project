@@ -1,4 +1,6 @@
 # Capstone Project
+By the way, this might not work when using Windows, but it does work on Mac and Linux environments.
+
 To run:
 
 ```
