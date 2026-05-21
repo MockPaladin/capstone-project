@@ -4,7 +4,7 @@ from typing import Self, Tuple
 import pygame
 
 type rectType = Tuple[int, int, int, int]  # x, y, width, height
-type tupledRectType = Tuple[Tuple[int, int], int, int]
+type tupledRectType = Tuple[Tuple[int, int], int, int]  # why do i have this
 type colorType = Tuple[int, int, int] | Tuple[int, int, int, int]  # RGB | RGBA
 type rectColorType = Tuple[rectType, colorType]
 
@@ -30,7 +30,7 @@ class Rectangle:
             self.values = (rect[0][0], rect[0][1], rect[1], rect[2])
             return
 
-        self.values = rect  # type: ignore
+        self.values = rect  # type: ignore (lets go i outsmarted Pylance)
         return
 
     def colliding(
